@@ -17,13 +17,27 @@ set rtp+=$VIMDIR/bundle/Vundle.vim/
 
 call vundle#begin()
 Plugin 'gmarik/vundle'
+
+" Plugin 'prabirshrestha/async.vim'
+" Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+" Plugin 'prabirshrestha/asyncomplete.vim'
+" Plugin 'prabirshrestha/vim-lsp'
+
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'ncm2/ncm2'
+Plugin 'roxma/nvim-yarp'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'ncm2/ncm2-vim-lsp'
+" Plug 'ncm2/ncm2-bufword'
+
 Plugin 'chriskempson/base16-vim'
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'hynek/vim-python-pep8-indent'
@@ -31,6 +45,42 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 call vundle#end()
+
+autocmd BufEnter * silent! call ncm2#enable_for_buffer()
+set completeopt=menuone             " show menu even for a single match
+set completeopt+=noinsert,noselect  " do not auto- select/insert completions
+" if executable('pyls')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'pyls',
+"         \ 'cmd': {server_info->['pyls']},
+"         \ 'whitelist': ['python'],
+"         \ })
+" endif
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ 'priority': 1,
+        \ 'workspace_config': {
+          \ 'pyls': {'plugins': {'jedi_completion': {'include_params': v:false}}},
+        \ },
+        \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
+endif
+
+
+let g:lsp_signs_enabled = 1           " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+noremap <silent> ;d :LspDefinition<CR>
+noremap <silent> ;r :LspReferences<CR>
+noremap <silent> ;f :LspDocumentFormat<CR>
+noremap <silent> ;n :LspRename<CR>
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 
 " ################## Bundle setting
 " tagbar mapping
@@ -164,7 +214,7 @@ endif
 " ####################### Misc settings
 autocmd BufWritePre * :%s/\s\+$//e  " trim trailing whitespaces on buffer's write
 
-setlocal completeopt=menu,longest
+" setlocal completeopt=menu,longest
 
 let python_highlight_all=1
 
