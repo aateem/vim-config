@@ -17,20 +17,66 @@ set rtp+=$VIMDIR/bundle/Vundle.vim/
 
 call vundle#begin()
 Plugin 'gmarik/vundle'
+
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/vim-lsp'
+
 Plugin 'chriskempson/base16-vim'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'altercation/vim-colors-solarized'
+
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/ListToggle'
 call vundle#end()
+
+" ##################### LSP(s) settings
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
+endif
+
+let g:lsp_signs_enabled = 1           " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+autocmd BufWritePost * :silent LspDocumentDiagnostics " show received LSP diagnostics
+
+setlocal completeopt=menu,longest
+
+noremap <silent> ;d :LspDefinition<CR>
+noremap <silent> ;r :LspReferences<CR>
+noremap <silent> ;f :LspDocumentFormat<CR>
+noremap <silent> ;n :LspRename<CR>
+noremap <silent> ;l :LspDocumentDiagnostics<CR>
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+" close quickfix window when file is closed
+autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+                \   q :cclose<cr>:lclose<cr>
+    autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+                \   bd|
+                \   q | endif
 
 " ################## Bundle setting
 " tagbar mapping
@@ -47,14 +93,14 @@ nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
 " syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=["flake8"]
-let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
-let g:syntastic_quiet_messages = { "!level": "errors" }
-let g:syntastic_python_flake8_args='--ignore=E501'
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_checkers=["flake8"]
+" let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
+" let g:syntastic_quiet_messages = { "!level": "errors" }
+" let g:syntastic_python_flake8_args='--ignore=E501'
 
 " vim-go settings
 let g:go_fmt_fail_silently = 1
@@ -164,9 +210,7 @@ endif
 " ####################### Misc settings
 autocmd BufWritePre * :%s/\s\+$//e  " trim trailing whitespaces on buffer's write
 
-setlocal completeopt=menu,longest
-
-let python_highlight_all=1
+"let python_highlight_all=1
 
 " toggle spelling checking
 function ToggleSpell()
