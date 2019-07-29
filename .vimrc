@@ -18,6 +18,8 @@ set rtp+=$VIMDIR/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'gmarik/vundle'
 
+Plugin 'python/black'
+
 Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'prabirshrestha/asyncomplete.vim'
@@ -47,6 +49,7 @@ if executable('pyls')
         \ 'name': 'pyls',
         \ 'cmd': {server_info->['pyls']},
         \ 'whitelist': ['python'],
+        \ 'workspace_config': {'pyls': {'plugins': {'pylint': {'enabled': v:true}, 'pycodestyle': {'enabled': v:false}}}}
         \ })
     autocmd FileType python setlocal omnifunc=lsp#complete
 endif
@@ -54,15 +57,15 @@ endif
 let g:lsp_signs_enabled = 1           " enable signs
 let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 
-autocmd BufWritePost * :silent LspDocumentDiagnostics " show received LSP diagnostics
+" autocmd BufWritePost * :silent LspDocumentDiagnostics " show received LSP diagnostics
 
 setlocal completeopt=menu,longest
 
-noremap <silent> ;d :LspDefinition<CR>
-noremap <silent> ;r :LspReferences<CR>
-noremap <silent> ;f :LspDocumentFormat<CR>
-noremap <silent> ;n :LspRename<CR>
-noremap <silent> ;l :LspDocumentDiagnostics<CR>
+noremap <silent> <leader>d :LspDefinition<CR>
+noremap <silent> <leader>r :LspReferences<CR>
+" noremap <silent> <leader>f :LspDocumentFormat<CR>
+" noremap <silent> <leader>n :LspRename<CR>
+noremap <silent> <leader>c :LspDocumentDiagnostics<CR>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -79,6 +82,8 @@ autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
                 \   q | endif
 
 " ################## Bundle setting
+let g:black_linelength = 100
+
 " tagbar mapping
 nmap <F6> :TagbarToggle<CR>
 
@@ -209,6 +214,7 @@ endif
 
 " ####################### Misc settings
 autocmd BufWritePre * :%s/\s\+$//e  " trim trailing whitespaces on buffer's write
+autocmd BufWritePre *.py execute ':Black'
 
 "let python_highlight_all=1
 
