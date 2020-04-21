@@ -29,27 +29,31 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'altercation/vim-colors-solarized'
 
-" Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/ListToggle'
 call vundle#end()
 
-" ##################### LSP(s) settings
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
         \ 'cmd': {server_info->['pyls']},
         \ 'whitelist': ['python'],
-        \ 'workspace_config': {'pyls': {'plugins': {'pylint': {'enabled': v:true}, 'pycodestyle': {'enabled': v:false}}}}
+        \ 'priority': 1,
+        \ 'workspace_config': {
+          \ 'pyls': {
+               \ 'plugins': {
+                    \ 'flake8': {'enabled': v:true},
+                    \ 'pycodestyle': {'enabled': v:false},
+               \ }
+          \ },
+        \ },
         \ })
     autocmd FileType python setlocal omnifunc=lsp#complete
 endif
@@ -57,14 +61,11 @@ endif
 let g:lsp_signs_enabled = 1           " enable signs
 let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 
-" autocmd BufWritePost * :silent LspDocumentDiagnostics " show received LSP diagnostics
 
 setlocal completeopt=menu,longest
 
 noremap <silent> <leader>d :LspDefinition<CR>
 noremap <silent> <leader>r :LspReferences<CR>
-" noremap <silent> <leader>f :LspDocumentFormat<CR>
-" noremap <silent> <leader>n :LspRename<CR>
 noremap <silent> <leader>c :LspDocumentDiagnostics<CR>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -84,6 +85,10 @@ autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
 " ################## Bundle setting
 let g:black_linelength = 100
 
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+
 " tagbar mapping
 nmap <F6> :TagbarToggle<CR>
 
@@ -96,29 +101,6 @@ let g:ctrlp_show_hidden = 1
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
-
-" syntastic settings
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_python_checkers=["flake8"]
-" let g:syntastic_go_checkers=['golint', 'govet', 'errcheck']
-" let g:syntastic_quiet_messages = { "!level": "errors" }
-" let g:syntastic_python_flake8_args='--ignore=E501'
-
-" vim-go settings
-let g:go_fmt_fail_silently = 1
-
-let g:go_highlight_functions = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-" vim-go requires Vim 7.4.2009 or Neovim 0.3.1, but you're using an older version.
-" Please update your Vim for the best vim-go experience.
-" If you really want to continue you can set this to make the error go away:
-let g:go_version_warning = 0
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -190,10 +172,10 @@ set list
 set listchars=tab:»·,trail:·
 
 set background=dark
-colorscheme railscasts
+colorscheme nord
 
 if has('gui_running')
-    colorscheme base16-atelier-plateau
+    colorscheme nord
 
     set guioptions-=m  " remove menubar from gui interface
     set guioptions-=T  " remove toolbar from gui interface
@@ -209,7 +191,7 @@ endif
 " use this with 8.0 version
 if has('termguicolors')
     set termguicolors
-    colorscheme base16-atelier-plateau
+    colorscheme nord
 endif
 
 " ####################### Misc settings
@@ -246,10 +228,3 @@ au BufNewFile,BufRead python
     \ set autoindent
     \ set fileformat=unix
     \ set cc=80
-
-" go mappings
-au FileType go set nolist
-au FileType go nmap <leader>gr <Plug>(go-run)
-au FileType go nmap <Leader>gc <Plug>(go-doc)
-au FileType go nmap <Leader>gb <Plug>(go-build)
-au FileType go nmap <Leader>gt <Plug>(go-def-tab)
