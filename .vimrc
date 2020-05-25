@@ -40,20 +40,16 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/ListToggle'
 call vundle#end()
 
+syntax on
+filetype plugin indent on
+
+" ##################### LSP(s) settings
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
         \ 'cmd': {server_info->['pyls']},
         \ 'whitelist': ['python'],
-        \ 'priority': 1,
-        \ 'workspace_config': {
-          \ 'pyls': {
-               \ 'plugins': {
-                    \ 'flake8': {'enabled': v:true},
-                    \ 'pycodestyle': {'enabled': v:false},
-               \ }
-          \ },
-        \ },
+        \ 'workspace_config': {'pyls': {'plugins': {'flake8': {'enabled': v:true}, 'pylint': {'enabled': v:false}, 'pycodestyle': {'enabled': v:false}}}}
         \ })
     autocmd FileType python setlocal omnifunc=lsp#complete
 endif
@@ -61,11 +57,16 @@ endif
 let g:lsp_signs_enabled = 1           " enable signs
 let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 
-
 setlocal completeopt=menu,longest
+
+let &t_SI.="\e[6 q" "SI = INSERT mode        / 6 -> solid vertical bar
+let &t_SR.="\e[4 q" "SR = REPLACE mode       / 4 -> solid underscore
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE) / 1 -> blinking block
 
 noremap <silent> <leader>d :LspDefinition<CR>
 noremap <silent> <leader>r :LspReferences<CR>
+noremap <silent> <leader>f :LspDocumentFormat<CR>
+noremap <silent> <leader>n :LspRename<CR>
 noremap <silent> <leader>c :LspDocumentDiagnostics<CR>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -105,100 +106,8 @@ nmap <leader>bs :CtrlPMRU<cr>
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" ################# General and test formatting settings
-syntax on
-filetype plugin indent on
-
-set nocompatible    " be vImproved :)
-
-set vb              " set visual bell
-
-set undolevels=2048
-
-set splitbelow      " put new window below when horizontal splitting
-set splitright      " put new window right when vertical splitting
-
-set backup          " backups of files
-
-" set backup and swap storing dirs to one well reachable and manageable
-" location
-if !isdirectory($VIMDIR . '/swap')
-    call mkdir($VIMDIR . '/swap', 'p')
-endif
-if !isdirectory($VIMDIR . '/backup')
-    call mkdir($VIMDIR . '/backup', 'p')
-endif
-
-set directory=$VIMDIR/swap
-set backupdir=$VIMDIR/backup
-
-set smarttab        " align tab instead of just inserting 4 spaces
-
-set incsearch       " enable incremental search
-set ignorecase      " ignore search case
-set smartcase       " match upper case when it is specified
-set hlsearch        " highlight search results
-
-set number          " enable line numbering
-set cursorline      " highlight line cursor pos
-set cursorcolumn    " highlight column cursor pos
-set virtualedit=all " you can move your cursor through every position in text
-
-set backspace=2     " allow spacing over indent, eol and the start of insert
-
-set autoread        " update files which has been modified outside of vim
-set autochdir       " change current working directory for vim
-
-set wildmenu        " enchanced commandline completion
-
-set showmode        " show what mode you are in
-
-set expandtab       " replace tabs with spaces
-set tabstop=4       " number of spaces to replace tab
-set shiftwidth=4    " number of spaces inserted for intendation
-
-set encoding=utf-8
-
-" ######################## Appearance
-set t_Co=256            " set 256 color mode
-
-set synmaxcol=256      " limit number of chars in line that are colorized
-
-set mousehide           " hide mouse cursor while typing
-
-set laststatus=2        " always display status line
-
-set list
-set listchars=tab:»·,trail:·
-
-set background=dark
-colorscheme nord
-
-if has('gui_running')
-    colorscheme nord
-
-    set guioptions-=m  " remove menubar from gui interface
-    set guioptions-=T  " remove toolbar from gui interface
-    set guioptions-=r  " remove right hand scroll bar from gui interface
-
-    if has('mac')
-        set guifont=Monaco:h13
-    else
-        set guifont=Ubuntu\ Mono\ 13
-    endif
-endif
-
-" use this with 8.0 version
-if has('termguicolors')
-    set termguicolors
-    colorscheme nord
-endif
-
 " ####################### Misc settings
 autocmd BufWritePre * :%s/\s\+$//e  " trim trailing whitespaces on buffer's write
-autocmd BufWritePre *.py execute ':Black'
-
-"let python_highlight_all=1
 
 " toggle spelling checking
 function ToggleSpell()
