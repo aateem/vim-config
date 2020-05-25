@@ -66,14 +66,12 @@ if exists('$SUDO_USER')
   set nowritebackup                   " don't create root-owned files
 else
   set backupdir=$HONE/.vim/tmp/backup     " keep backup files out of the way
-  set backupdir+=.
 endif
 
 if exists('$SUDO_USER')
   set noswapfile                      " don't create root-owned files
 else
   set directory=$HOME/.vim/tmp/swap/      " keep swap files out of the way
-  set directory+=.
 endif
 
 set scrolloff=3                       " start scrolling 3 lines before edge of viewport
