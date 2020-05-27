@@ -5,9 +5,11 @@ if has('termguicolors')
     set termguicolors
 endif
 
-set guioptions-=m  " remove menubar from gui interface
-set guioptions-=T  " remove toolbar from gui interface
-set guioptions-=r  " remove right hand scroll bar from gui interface
+if has('gui_running')
+    set guioptions-=m  " remove menubar from gui interface
+    set guioptions-=T  " remove toolbar from gui interface
+    set guioptions-=r  " remove right hand scroll bar from gui interface
+endif
 
 if has('mac')
     set guifont=Monaco:h13
@@ -65,7 +67,7 @@ if exists('$SUDO_USER')
   set nobackup                        " don't create root-owned files
   set nowritebackup                   " don't create root-owned files
 else
-  set backupdir=$HONE/.vim/tmp/backup     " keep backup files out of the way
+  set backupdir=$HOME/.vim/tmp/backup     " keep backup files out of the way
 endif
 
 if exists('$SUDO_USER')
