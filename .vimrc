@@ -3,42 +3,23 @@ let $VIMDIR=fnamemodify($MYVIMRC, ':h') . '/.vim'
 
 filetype off
 
-if !isdirectory($VIMDIR . '/bundle')
-    call mkdir($VIMDIR . '/bundle', 'p')
-    cd $VIMDIR/bundle
-    if executable('git')
-        !git clone https://github.com/gmarik/Vundle.vim.git
-    else
-        echo 'WARNING: Git is missing! Cannot pull Vundle plugin.'
-    endif
-endif
+packadd! async.vim
+packadd! asyncomplete-lsp.vim
+packadd! asyncomplete.vim
+packadd! vim-lsp
 
-set rtp+=$VIMDIR/bundle/Vundle.vim/
+packadd! base16-vim
+packadd! nord-vim
+packadd! vim-colors-solarized
 
-call vundle#begin()
-Plugin 'gmarik/vundle'
-
-Plugin 'python/black'
-
-Plugin 'prabirshrestha/async.vim'
-Plugin 'prabirshrestha/asyncomplete-lsp.vim'
-Plugin 'prabirshrestha/asyncomplete.vim'
-Plugin 'prabirshrestha/vim-lsp'
-
-Plugin 'chriskempson/base16-vim'
-Plugin 'arcticicestudio/nord-vim'
-Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/ListToggle'
-call vundle#end()
+packadd! vim-fugitive
+packadd! vim-airline
+packadd! ctrlp.vim
+packadd! vim-surround
+packadd! vim-gitgutter
+packadd! vim-python-pep8-indent
+packadd! nerdtree
+packadd! ListToggle
 
 syntax on
 filetype plugin indent on
@@ -83,15 +64,10 @@ autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
                 \   bd|
                 \   q | endif
 
-" ################## Bundle setting
-let g:black_linelength = 100
 
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
-
-" tagbar mapping
-nmap <F6> :TagbarToggle<CR>
 
 " ctrlp settings
 set wildignore+=*.pyc,*.swp
