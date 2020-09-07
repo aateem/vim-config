@@ -43,3 +43,9 @@
 [submodule "ListToggle"]
 	path = .vim/pack/aateem/opt/ListToggle
 	url = git@github.com:Valloric/ListToggle.git
+[submodule "vim-commentary"]
+	path = .vim/pack/aateem/opt/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
+[submodule "indentLine"]
+	path = .vim/pack/aateem/opt/indentLine
+	url = git@github.com:Yggdroot/indentLine.git

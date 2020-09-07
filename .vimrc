@@ -20,6 +20,8 @@ packadd! vim-gitgutter
 packadd! vim-python-pep8-indent
 packadd! nerdtree
 packadd! ListToggle
+packadd! vim-commentary
+packadd! indentLine
 
 syntax on
 filetype plugin indent on
