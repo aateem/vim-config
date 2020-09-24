@@ -1,4 +1,1 @@
-.vim/*.swp
-.vim/backup
-.vim/bundle
-.vim/swap
+.vim/tmp

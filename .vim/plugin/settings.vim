@@ -57,17 +57,23 @@ set backspace=2     " allow spacing over indent, eol and the start of insert
 
 set showmode        " show what mode you are in
 
-"set cursorline      " highlight line cursor pos
+set cursorline      " highlight line cursor pos
 set cursorcolumn    " highlight column cursor pos
 
 set splitbelow      " put new window below when horizontal splitting
 set splitright      " put new window right when vertical splitting
 
+
 if exists('$SUDO_USER')
   set nobackup                        " don't create root-owned files
   set nowritebackup                   " don't create root-owned files
 else
-  set backupdir=$HOME/.vim/tmp/backup     " keep backup files out of the way
+  set backup                          " write backup
+  let b:backup_path = $HOME . "/.vim/tmp/backup"
+  if !isdirectory(b:backup_path)
+      call mkdir(b:backup_path)
+  endif
+  let &backupdir = b:backup_path      " set backup directory
 endif
 
 if exists('$SUDO_USER')
