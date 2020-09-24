@@ -98,3 +98,7 @@ set nocompatible    " be vImproved :)
 set belloff=all     " disable bells
 
 set encoding=utf-8
+
+if has('nvim')
+    let g:python3_host_prog = fnamemodify($MYVIMRC, ":h") . "/venv" . "/bin/python"
+endif
