@@ -3,10 +3,15 @@ let $VIMDIR=fnamemodify($MYVIMRC, ':h') . '/.vim'
 
 filetype off
 
-packadd! async.vim
 packadd! asyncomplete-lsp.vim
 packadd! asyncomplete.vim
-packadd! vim-lsp
+
+if has('nvim-0.5.0')
+    packadd! nvim-lspconfig
+else
+    packadd! async.vim
+    packadd! vim-lsp
+endif
 
 packadd! base16-vim
 packadd! nord-vim

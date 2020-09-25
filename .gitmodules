@@ -49,3 +49,6 @@
 [submodule "indentLine"]
 	path = .vim/pack/aateem/opt/indentLine
 	url = git@github.com:Yggdroot/indentLine.git
+[submodule "nvim-lspconfig"]
+	path = .vim/pack/aateem/opt/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
