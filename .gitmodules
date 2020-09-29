@@ -58,3 +58,6 @@
 [submodule "deoplete-lsp"]
 	path = .vim/pack/aateem/opt/deoplete-lsp
 	url = git@github.com:Shougo/deoplete-lsp.git
+[submodule "diagnostic-nvim"]
+	path = .vim/pack/aateem/opt/diagnostic-nvim
+	url = git@github.com:nvim-lua/diagnostic-nvim.git

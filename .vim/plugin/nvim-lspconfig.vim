@@ -14,6 +14,7 @@ nnoremap <silent> <leader>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 lua <<EOF
     require'nvim_lsp'.pyls.setup{
+        on_attach=require'diagnostic'.on_attach,
         settings = {
             configurationSources = {
                 pycodestyle,
@@ -30,6 +31,7 @@ EOF
 augroup MyLSP
     autocmd!
     autocmd FileType python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-    " autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 augroup END
+
+let g:diagnostic_enable_virtual_text = 1
+nnoremap <silent> <leader>j :OpenDiagnostic<CR>
