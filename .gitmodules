@@ -61,3 +61,6 @@
 [submodule "diagnostic-nvim"]
 	path = .vim/pack/aateem/opt/diagnostic-nvim
 	url = git@github.com:nvim-lua/diagnostic-nvim.git
+[submodule "vim-dirvish"]
+	path = .vim/pack/aateem/opt/vim-dirvish
+	url = git@github.com:justinmk/vim-dirvish.git
