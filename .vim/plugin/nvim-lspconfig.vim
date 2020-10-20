@@ -13,8 +13,14 @@ nnoremap <silent> <leader>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 lua <<EOF
+
+    local on_attach = function(client)
+        require'completion'.on_attach(client)
+        require'diagnostic'.on_attach(client)
+    end
+
     require'nvim_lsp'.pyls.setup{
-        on_attach=require'diagnostic'.on_attach,
+        on_attach=on_attach,
         settings = {
             configurationSources = {
                 pycodestyle,
@@ -26,6 +32,7 @@ lua <<EOF
             }
         }
     }
+
 EOF
 
 augroup MyLSP

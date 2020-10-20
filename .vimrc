@@ -4,11 +4,8 @@ filetype off
 
 if has('nvim-0.5.0')
     packadd! nvim-lspconfig
-    packadd! deoplete.nvim
-    packadd! deoplete-lsp
     packadd! diagnostic-nvim
-
-    call deoplete#enable()
+    packadd! completion-nvim
 else
     packadd! async.vim
     packadd! vim-lsp
@@ -34,7 +31,8 @@ packadd! indentLine
 syntax on
 filetype plugin indent on
 
-setlocal completeopt=menu,longest
+" setlocal completeopt=menu,longest
+setlocal completeopt=menuone,noinsert
 
 let &t_SI.="\e[6 q" "SI = INSERT mode        / 6 -> solid vertical bar
 let &t_SR.="\e[4 q" "SR = REPLACE mode       / 4 -> solid underscore

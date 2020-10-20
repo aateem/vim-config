@@ -64,3 +64,6 @@
 [submodule "vim-dirvish"]
 	path = .vim/pack/aateem/opt/vim-dirvish
 	url = git@github.com:justinmk/vim-dirvish.git
+[submodule "completion-nvim"]
+	path = .vim/pack/aateem/opt/completion-nvim
+	url = git@github.com:nvim-lua/completion-nvim.git
