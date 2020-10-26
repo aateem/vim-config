@@ -67,3 +67,6 @@
 [submodule "completion-nvim"]
 	path = .vim/pack/aateem/opt/completion-nvim
 	url = git@github.com:nvim-lua/completion-nvim.git
+[submodule "nvim-treesitter"]
+	path = .vim/pack/aateem/opt/nvim-treesitter
+	url = git@github.com:nvim-treesitter/nvim-treesitter.git

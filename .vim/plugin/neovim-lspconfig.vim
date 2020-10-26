@@ -8,7 +8,7 @@ nnoremap <silent> <leader>D     <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>s     <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <leader>t     <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <leader>r     <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <leaser>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <leader>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
@@ -19,7 +19,10 @@ lua <<EOF
         require'diagnostic'.on_attach(client)
     end
 
-    require'nvim_lsp'.pyls.setup{
+    local nvim_lsp = require'nvim_lsp'
+
+    nvim_lsp.pyls.setup{
+        -- root_dir=nvim_lsp.util.root_pattern('.git');
         on_attach=on_attach,
         settings = {
             configurationSources = {
