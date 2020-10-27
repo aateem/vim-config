@@ -45,3 +45,5 @@ augroup END
 
 let g:diagnostic_enable_virtual_text = 1
 nnoremap <silent> <leader>j :OpenDiagnostic<CR>
+
+let g:completion_trigger_on_delete = 1
