@@ -7,6 +7,11 @@ if has('nvim-0.5.0')
     packadd! diagnostic-nvim
     packadd! completion-nvim
     packadd! nvim-treesitter
+    packadd! nvim-treesitter-context
+
+    packadd! popup.nvim
+    packadd! plenary.nvim
+    packadd! telescope.nvim
 else
     packadd! async.vim
     packadd! vim-lsp

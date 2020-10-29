@@ -9,6 +9,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
   },
+  -- ident = {
+  --   enable = true,
+  -- },
 }
 
 EOF

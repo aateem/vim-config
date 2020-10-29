@@ -87,7 +87,7 @@ set scrolloff=3                       " start scrolling 3 lines before edge of v
 set hidden          " hide buffers with unsaved changes
 
 set autoread        " update files which has been modified outside of vim
-set autochdir       " change current working directory for vim
+" set autochdir       " change current working directory for vim
 
 set wildmenu        " enchanced commandline completion
 

@@ -70,3 +70,15 @@
 [submodule "nvim-treesitter"]
 	path = .vim/pack/aateem/opt/nvim-treesitter
 	url = git@github.com:nvim-treesitter/nvim-treesitter.git
+[submodule "popup.nvim"]
+	path = .vim/pack/aateem/opt/popup.nvim
+	url = git@github.com:nvim-lua/popup.nvim.git
+[submodule "plenary.nvim"]
+	path = .vim/pack/aateem/opt/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim.git
+[submodule "telescope.nvim"]
+	path = .vim/pack/aateem/opt/telescope.nvim
+	url = git@github.com:nvim-lua/telescope.nvim.git
+[submodule "nvim-treesitter-context"]
+	path = .vim/pack/aateem/opt/nvim-treesitter-context
+	url = git@github.com:romgrk/nvim-treesitter-context.git
