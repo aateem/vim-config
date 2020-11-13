@@ -4,10 +4,10 @@ filetype off
 
 if has('nvim-0.5.0')
     packadd! nvim-lspconfig
-    packadd! diagnostic-nvim
     packadd! completion-nvim
-    packadd! nvim-treesitter
-    packadd! nvim-treesitter-context
+
+    " packadd! nvim-treesitter
+    " packadd! nvim-treesitter-context
 
     packadd! popup.nvim
     packadd! plenary.nvim
