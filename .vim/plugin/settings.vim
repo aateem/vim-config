@@ -18,7 +18,7 @@ else
 endif
 
 set background=dark
-colorscheme nord
+colorscheme base16-default-light
 
 set synmaxcol=256      " limit number of chars in line that are colorized
 
