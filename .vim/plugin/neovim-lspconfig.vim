@@ -30,17 +30,7 @@ lua <<EOF
 
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-
-        -- To configure sign display,
-        --  see: ":help vim.lsp.diagnostic.set_signs()"
-        signs = true,
-
-        -- This is similar to:
-        -- "let g:diagnostic_insert_delay = 1"
         update_in_insert = true,
-
-        underline = true,
       }
     )
 
@@ -48,7 +38,7 @@ lua <<EOF
         require'completion'.on_attach(client)
     end
 
-    local nvim_lsp = require'nvim_lsp'
+    local nvim_lsp = require'lspconfig'
 
     nvim_lsp.pyls.setup{
         -- root_dir=nvim_lsp.util.root_pattern('.git');

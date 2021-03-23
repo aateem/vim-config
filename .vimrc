@@ -38,7 +38,8 @@ syntax on
 filetype plugin indent on
 
 " setlocal completeopt=menu,longest
-setlocal completeopt=menuone,noinsert
+" setlocal completeopt=menuone,noinsert,longest
+set completeopt=menuone,noinsert,noselect
 
 let &t_SI.="\e[6 q" "SI = INSERT mode        / 6 -> solid vertical bar
 let &t_SR.="\e[4 q" "SR = REPLACE mode       / 4 -> solid underscore

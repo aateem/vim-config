@@ -7,3 +7,7 @@ nnoremap <Leader>p <cmd>lua require'telescope.builtin'.find_files{ find_command 
 nnoremap <silent> gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
 
 nnoremap <silent> gs <cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>
+
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
