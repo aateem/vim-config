@@ -16,17 +16,22 @@ nnoremap <silent> <leader>dd    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> <leader>dn    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>dp    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
-sign define LspDiagnosticsSignError text=E texthl=LspDiagnosticsError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=W texthl=LspDiagnosticsWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsHint linehl= numhl=
-
-hi link LspDiagnosticsVirtualTextError LspDiagnosticsError
-hi link LspDiagnosticsVirtualTextWarning LspDiagnosticsWarning
-hi link LspDiagnosticsVirtualTextInformation LspDiagnosticsInformation
-hi link LspDiagnosticsVirtualTextHint LspDiagnosticsHint
+" highlight! link LspDiagnosticsVirtualTextError LspDiagnosticsError
+" highlight! link LspDiagnosticsVirtualTextWarning LspDiagnosticsWarning
+" highlight! link LspDiagnosticsVirtualTextInformation LspDiagnosticsInformation
+" highlight! link LspDiagnosticsVirtualTextHint LspDiagnosticsHint
 
 lua <<EOF
+
+    -- left here as an example
+    -- vim.fn.sign_define("LspDiagnosticsSignError", {text="E", texthl="LspDiagnosticsError", linehl="", numhl="" })
+    -- vim.fn.sign_define("LspDiagnosticsSignWarning", {text="W", texthl="LspDiagnosticsWarning", linehl="", numhl=""})
+    -- vim.fn.sign_define("LspDiagnosticsSignInformation", {text="I", texthl="LspDiagnosticsInformation", linehl="", numhl=""})
+    -- vim.fn.sign_define("LspDiagnosticsSignHint", {text="H", texthl="LspDiagnosticsHint", linehl="", numhl=""})
+
+    -- this is required to redefine LSPDiagnostics* hightlight groups as most of colorshemes out there
+    -- do `hi reset`
+    vim.cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
 
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -40,19 +45,8 @@ lua <<EOF
 
     local nvim_lsp = require'lspconfig'
 
-    nvim_lsp.pyls.setup{
-        -- root_dir=nvim_lsp.util.root_pattern('.git');
+    nvim_lsp.pyright.setup{
         on_attach=on_attach,
-        settings = {
-            configurationSources = {
-                pycodestyle,
-                flake8
-            },
-            plugins = {
-                flake8 = { enabled = true },
-                pylint = { enabled = false },
-            }
-        }
     }
 
 EOF
