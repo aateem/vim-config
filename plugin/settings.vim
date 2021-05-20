@@ -1,41 +1,28 @@
-let $VIMDIR=fnamemodify($MYVIMRC, ':h') . '/.vim'
-
-filetype off
-
-if has('nvim-0.5.0')
-    packadd! nvim-lspconfig
-    packadd! completion-nvim
-
-    " packadd! nvim-treesitter
-    " packadd! nvim-treesitter-context
-
-    packadd! popup.nvim
-    packadd! plenary.nvim
-    packadd! telescope.nvim
-else
-    packadd! async.vim
-    packadd! vim-lsp
-    packadd! asyncomplete-lsp.vim
-    packadd! asyncomplete.vim
+if has('termguicolors')
+    set termguicolors
 endif
 
-packadd! base16-vim
-packadd! nord-vim
-packadd! vim-colors-solarized
+if has('gui_running')
+    set guioptions-=m  " remove menubar from gui interface
+    set guioptions-=T  " remove toolbar from gui interface
+    set guioptions-=r  " remove right hand scroll bar from gui interface
+endif
 
-packadd! vim-fugitive
-packadd! vim-airline
-packadd! ctrlp.vim
-packadd! vim-surround
-packadd! vim-gitgutter
-packadd! vim-python-pep8-indent
-packadd! nerdtree
-packadd! ListToggle
-packadd! vim-commentary
-packadd! indentLine
+" colorscheme base16-default-light
+colorscheme onedark
 
-syntax on
-filetype plugin indent on
+" set list
+set listchars=nbsp:⦸    " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+set listchars+=tab:»·
+set listchars+=trail:·
+
+" switch to (absolute) number when losing focus,
+" useful when working with the same file in the split
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained * set relativenumber
+  autocmd BufLeave,FocusLost   * set norelativenumber
+augroup END
 
 " setlocal completeopt=menu,longest
 " setlocal completeopt=menuone,noinsert,longest
@@ -58,16 +45,6 @@ autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
     autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
                 \   bd|
                 \   q | endif
-
-" ctrlp settings
-set wildignore+=*.pyc,*.swp
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_show_hidden = 1
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -100,6 +77,19 @@ au BufNewFile,BufRead python
     \ set shiftwidth=4
     \ set textwidth=79
     \ set expandtab
-    \ set autoindent
     \ set fileformat=unix
     \ set cc=80
+
+" make resize more convenient
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+
+" quick write
+nnoremap <Leader>w :w<CR>
+
+" quick tab navigation
+nnoremap <Leader>t gt
+nnoremap <Leader>T gT
+
+" quick switch between recent buffers
+nnoremap <Leader>b <C-^>
