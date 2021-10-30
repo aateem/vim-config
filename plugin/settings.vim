@@ -93,3 +93,6 @@ nnoremap <Leader>T gT
 
 " quick switch between recent buffers
 nnoremap <Leader>b <C-^>
+
+" enable mouse support
+set mouse=a
