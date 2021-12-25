@@ -24,10 +24,6 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost   * set norelativenumber
 augroup END
 
-" setlocal completeopt=menu,longest
-" setlocal completeopt=menuone,noinsert,longest
-set completeopt=menuone,noinsert,noselect
-
 let &t_SI.="\e[6 q" "SI = INSERT mode        / 6 -> solid vertical bar
 let &t_SR.="\e[4 q" "SR = REPLACE mode       / 4 -> solid underscore
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE) / 1 -> blinking block

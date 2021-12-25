@@ -24,6 +24,8 @@ return require('packer').startup(
         -- let packer manage itself
         use 'wbthomason/packer.nvim'
 
+        use 'onsails/lspkind-nvim'
+
         -- fancy colors
         use 'joshdick/onedark.vim'
         use 'arcticicestudio/nord-vim'
@@ -40,7 +42,18 @@ return require('packer').startup(
 
         -- lsp stuff
         use "neovim/nvim-lspconfig"
-        use "nvim-lua/completion-nvim"
+
+        -- completion stuff
+        use "hrsh7th/nvim-cmp"
+        use "hrsh7th/cmp-nvim-lsp"
+        use 'hrsh7th/cmp-nvim-lsp'
+        use 'hrsh7th/cmp-buffer'
+        use 'hrsh7th/cmp-path'
+        use 'hrsh7th/cmp-cmdline'
+
+        -- For vsnip users.
+        use 'hrsh7th/cmp-vsnip'
+        use 'hrsh7th/vim-vsnip'
 
         -- git
         use "tpope/vim-fugitive"

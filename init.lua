@@ -1,9 +1,16 @@
 require('plugins')
+require('completion')
 
 local vc = vim.cmd
 
 local nnoremap = function(lhs, rhs)
-    vim.api.nvim_buf_set_keymap(0, 'n', lhs, rhs, {noremap = true, silent = true})
+    vim.api.nvim_buf_set_keymap(
+        0,
+        'n',
+        lhs,
+        rhs,
+        {noremap = true, silent = true}
+    )
 end
 
 vim.g.mapleader = ' '
@@ -34,17 +41,13 @@ o.undolevels = 2048
 o.background = "dark"
 
 
-vim.cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
+-- vim.cmd([[ autocmd ColorScheme * :lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights() ]])
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     update_in_insert = true,
   }
 )
-
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-end
 
 local nvim_lsp = require'lspconfig'
 
