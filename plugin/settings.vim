@@ -8,9 +8,6 @@ if has('gui_running')
     set guioptions-=r  " remove right hand scroll bar from gui interface
 endif
 
-" colorscheme base16-default-light
-colorscheme onedark
-
 " set list
 set listchars=nbsp:⦸    " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
 set listchars+=tab:»·
@@ -60,11 +57,6 @@ function ToggleSpell()
 endfunction
 nmap <F5> :call ToggleSpell()<CR>
 
-"simplified windows navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 "python file settings
 au BufNewFile,BufRead python
@@ -90,5 +82,8 @@ nnoremap <Leader>T gT
 " quick switch between recent buffers
 nnoremap <Leader>b <C-^>
 
-" enable mouse support
-set mouse=a
+"simplified windows navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
