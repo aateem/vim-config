@@ -40,12 +40,17 @@ return require('packer').startup(
             }
         }
 
+        use {
+            'nvim-treesitter/nvim-treesitter',
+            run = ':TSUpdate'
+        }
+        use "nvim-treesitter/nvim-treesitter-textobjects"
+
         -- lsp stuff
         use "neovim/nvim-lspconfig"
 
         -- completion stuff
         use "hrsh7th/nvim-cmp"
-        use "hrsh7th/cmp-nvim-lsp"
         use 'hrsh7th/cmp-nvim-lsp'
         use 'hrsh7th/cmp-buffer'
         use 'hrsh7th/cmp-path'
@@ -74,6 +79,8 @@ return require('packer').startup(
 
         -- browsers
         use "preservim/nerdtree"
+
+        -- use "mhartington/formatter.nvim"
     end
 )
 

@@ -15,11 +15,6 @@ set listchars+=trail:·
 
 " switch to (absolute) number when losing focus,
 " useful when working with the same file in the split
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained * set relativenumber
-  autocmd BufLeave,FocusLost   * set norelativenumber
-augroup END
 
 let &t_SI.="\e[6 q" "SI = INSERT mode        / 6 -> solid vertical bar
 let &t_SR.="\e[4 q" "SR = REPLACE mode       / 4 -> solid underscore
