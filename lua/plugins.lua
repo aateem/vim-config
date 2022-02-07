@@ -30,6 +30,7 @@ return require('packer').startup(
         use 'joshdick/onedark.vim'
         use 'arcticicestudio/nord-vim'
         use 'chriskempson/base16-vim'
+        use 'EdenEast/nightfox.nvim'
 
         -- navigation
         use {
@@ -54,11 +55,8 @@ return require('packer').startup(
         use 'hrsh7th/cmp-nvim-lsp'
         use 'hrsh7th/cmp-buffer'
         use 'hrsh7th/cmp-path'
-        use 'hrsh7th/cmp-cmdline'
-
-        -- For vsnip users.
-        use 'hrsh7th/cmp-vsnip'
-        use 'hrsh7th/vim-vsnip'
+        use 'L3MON4D3/LuaSnip'
+        use 'saadparwaiz1/cmp_luasnip'
 
         -- git
         use "tpope/vim-fugitive"
@@ -79,8 +77,6 @@ return require('packer').startup(
 
         -- browsers
         use "preservim/nerdtree"
-
-        -- use "mhartington/formatter.nvim"
     end
 )
 

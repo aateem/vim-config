@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/ListToggle",
     url = "https://github.com/Valloric/ListToggle"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["base16-vim"] = {
     loaded = true,
     path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/base16-vim",
@@ -83,11 +88,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-cmdline"] = {
-    loaded = true,
-    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -99,15 +99,10 @@ _G.packer_plugins = {
     path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-vsnip"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
-  },
-  ["formatter.nvim"] = {
-    loaded = true,
-    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/formatter.nvim",
-    url = "https://github.com/mhartington/formatter.nvim"
+    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   indentLine = {
     loaded = true,
@@ -203,11 +198,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/Users/artem.roma/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 
